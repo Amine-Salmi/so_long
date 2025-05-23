@@ -6,14 +6,14 @@
 /*   By: asalmi <asalmi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 00:19:55 by asalmi            #+#    #+#             */
-/*   Updated: 2024/06/11 20:10:50 by asalmi           ###   ########.fr       */
+/*   Updated: 2025/03/08 01:39:55 by asalmi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SO_LONG_BONUS_H
 # define SO_LONG_BONUS_H
 
-# include "../../MLX42/include/MLX42/MLX42.h"
+# include "/Users/asalmi/MLX42/include/MLX42/MLX42.h"
 # include "./get_next_line/get_next_line.h"
 # include <fcntl.h>
 # include <stdlib.h>

@@ -1,7 +1,11 @@
 NAME = so_long_bonus
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
-LIBS = ../../MLX42/build/libmlx42.a -framework Cocoa -framework OpenGL -framework IOKit -Iinclude -lglfw -L"/Users/asalmi/.brew/opt/glfw/lib"
+LIBMLX  = ~/MLX42
+
+HEADERS = -I ./include -I $(LIBMLX)/include/MLX42
+LIBS    = $(LIBMLX)/build/libmlx42.a -ldl -lglfw -pthread -lm
+# LIBS = ../../MLX42/build/libmlx42.a -framework Cocoa -framework OpenGL -framework IOKit -Iinclude -lglfw -L"/Users/asalmi/.brew/opt/glfw/lib"
 RM = rm -rf
 
 SRC = animation_bonus.c exit_bonus.c exit_remaining_bonus.c frams_bonus.c load_images_bonus.c \
@@ -14,17 +18,21 @@ RED=\033[0;31m
 PURPLE=\033[0;35m
 NC=\033[0m
 
-all : $(NAME)
+all : libmlx $(NAME)
+
+libmlx:
+	@cmake $(LIBMLX) -B $(LIBMLX)/build && make -C $(LIBMLX)/build -j4
 
 $(NAME) : $(OBJC) so_long_bonus.h
 	@$(CC) $(CFLAGS) $(OBJC) $(LIBS) -o $@
 	@echo "${PURPLE}BONUS DONE${NC}"
 
 %.o : %.c so_long_bonus.h
-	@$(CC) $(CFLAGS) -c $< -o $@
+	@$(CC) $(CFLAGS) $(HEADERS) -c $< -o $@
 
 clean :
 	@$(RM) $(OBJC)
+	@rm -rf $(LIBMLX)/build
 
 fclean : clean
 	@$(RM) $(NAME)
